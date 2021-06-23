@@ -2,8 +2,11 @@
 * ver1.0 : 2021.06.23
 
 # 시작하기 
+첫 번째 파이썬 프로젝트 중 구현하게 된 소스입니다.
+구동은 엄~청 느리지만, 안정성에 대한 부분과 Class 공부를 위해 나름 보완 해보았습니다.
+
 * Chrome://Print 화면의 컨트롤에 대한 소스입니다. 
-* Python의 Selenium를 사용한 웹 크롤링 방식입니다. 
+* Python의 Selenium를 사용한 웹 크롤링 방식입니다.  
 * ChromeDriver를 다운로드 받아 주세요. 
   * https://chromedriver.chromium.org/downloads   
 

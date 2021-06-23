@@ -1,14 +1,15 @@
 import time
 import pyautogui
 from pywinauto.application import Application
+from pywinauto.backend import element_class
 from selenium import webdriver
 
 #쉐도우 돔을 위한 Class
 class shadowDOM :
-    def __init__(self, driver, Tag) :
+    def __init__(self, driver) :
         driver.implicitly_wait(90)
         self.driver = driver
-        self.root = self.driver.execute_script('return arguments[0].shadowRoot',self.root.find_element_by_tag_name(element))
+        self.root = driver
 
     def CSS(self, element):
         driver.implicitly_wait(90)
@@ -59,7 +60,8 @@ driver.switch_to.window(driver.window_handles[-1])
 time.sleep(3)
 
 #PDF로 저장 찾기
-PDFCK = shadowDOM(driver,'print-preview-app')
+PDFCK = shadowDOM(driver)
+PDFCK.Tag('print-preview-app')
 PDFCK.CSS('#sidebar')
 PDFCK.CSS('#destinationSettings')
 PDFCK.CSS('#destinationSelect')
@@ -67,14 +69,16 @@ PDFCK.CSSck('print-preview-settings-section:nth-child(9) > div > select > option
 time.sleep(3)
 
 #가로방향 레이아웃
-RayOutCK = shadowDOM(driver,'print-preview-app')
+RayOutCK = shadowDOM(driver)
+RayOutCK.Tag('print-preview-app')
 RayOutCK.CSS('#sidebar')
 RayOutCK.CSS('#container > print-preview-layout-settings')
 RayOutCK.CSSck('print-preview-settings-section > div > select > option:nth-child(2)')
 time.sleep(3)
 
 #저장 버튼
-SaveCK = shadowDOM(driver,'print-preview-app')
+SaveCK = shadowDOM(driver)
+SaveCK.Tag('print-preview-app')
 SaveCK.Tag('print-preview-sidebar')
 SaveCK.CSS('print-preview-button-strip')
 driver.implicitly_wait(90)
@@ -103,4 +107,3 @@ if(blYN):
     print("저장 실패")
 else :
     print("저장 성공")
-

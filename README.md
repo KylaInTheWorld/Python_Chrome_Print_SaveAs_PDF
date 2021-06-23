@@ -1,4 +1,5 @@
 # Python_Chrome_Print_SaveAs_PDF
+* ver1.0 : 2021.06.23
 
 # 시작하기 
 * Chrome://Print 화면의 컨트롤에 대한 소스입니다. 

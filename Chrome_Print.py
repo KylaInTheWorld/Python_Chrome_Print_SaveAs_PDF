@@ -10,20 +10,31 @@ class shadowDOM :
         driver.implicitly_wait(90)
         self.driver = driver
         self.root = driver
+    
+    #재귀함수
+    def CSS(self, css):
+        self.root = self.driver.execute_async_script("""
+            const traverse = e => {
+                let el
+                if(el = e.querySelector('""" + css + """')){
+                    arguments[0](el)
+                }
+                [...e.querySelectorAll('*')].filter(e => e.shadowRoot).map(e => traverse(e.shadowRoot))
+            }
 
-    def CSS(self, element):
-        driver.implicitly_wait(90)
-        self.root = self.driver.execute_script('return arguments[0].shadowRoot',self.root.find_element_by_css_selector(element))
+            [...document.querySelectorAll('*')].filter(e => e.shadowRoot).map(e => traverse(e.shadowRoot))
+
+            arguments[0](null)""")
 
     def Tag(self, element):
         driver.implicitly_wait(90)
         self.root = self.driver.execute_script('return arguments[0].shadowRoot',self.root.find_element_by_tag_name(element))
 
     #해당 Element 클릭
-    def CSSck (self, element):
+    def CSSck (self):
         driver.implicitly_wait(90)
-        self.root.find_element_by_css_selector(element).click()
-        text = self.root.find_element_by_css_selector(element).text
+        self.root.click()
+        text = self.root.text
         print(text+" 클릭 완료")
 
 #다른 이름으로 저장창 저장버튼 클릭 함수
@@ -65,7 +76,8 @@ PDFCK.Tag('print-preview-app')
 PDFCK.CSS('#sidebar')
 PDFCK.CSS('#destinationSettings')
 PDFCK.CSS('#destinationSelect')
-PDFCK.CSSck('print-preview-settings-section:nth-child(9) > div > select > option:nth-child(3)')
+PDFCK.CSS('print-preview-settings-section:nth-child(9) > div > select > option:nth-child(3)[value="Save as PDF/local/"]')
+PDFCK.CSSck()
 time.sleep(3)
 
 #가로방향 레이아웃
@@ -73,16 +85,19 @@ RayOutCK = shadowDOM(driver)
 RayOutCK.Tag('print-preview-app')
 RayOutCK.CSS('#sidebar')
 RayOutCK.CSS('#container > print-preview-layout-settings')
-RayOutCK.CSSck('print-preview-settings-section > div > select > option:nth-child(2)')
+RayOutCK.CSS('print-preview-settings-section > div > select > option:nth-child(2)[value="landscape"]')
+RayOutCK.CSSck()
 time.sleep(3)
+
 
 #저장 버튼
 SaveCK = shadowDOM(driver)
 SaveCK.Tag('print-preview-app')
-SaveCK.Tag('print-preview-sidebar')
+SaveCK.CSS('#sidebar')
 SaveCK.CSS('print-preview-button-strip')
 driver.implicitly_wait(90)
-SaveCK.CSSck('div > cr-button.action-button')
+SaveCK.CSS('div > cr-button.action-button')
+SaveCK.CSSck()
 time.sleep(3)
 
 #다른 이름으로 저장 창

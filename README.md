@@ -1,5 +1,6 @@
 # Python_Chrome_Print_SaveAs_PDF
-* ver1.0 : 2021.06.23
+* ver1.0 : 2021.06.23 최초 작성
+* ver1.1 : 2022.01.12 ShadowDOM 내의 element 확인 불가 수정
 
 # 시작하기 
 첫 번째 파이썬 프로젝트 중 구현하게 된 소스입니다.
@@ -9,6 +10,8 @@
 * Python의 Selenium를 사용한 웹 크롤링 방식입니다.  
 * ChromeDriver를 다운로드 받아 주세요. 
   * https://chromedriver.chromium.org/downloads   
+* ver1.1 => ChromeDriver 96.x.x 버전부터 shadowDOM을 추적하는 부분에서 문제가 발생되었습니다.
+  * 재귀함수, CSS선택자 수정.
 
 # 설치 패키지 
 * Selenium.webdriver : 웹 크롤링을 위한 패키지 
